@@ -1,0 +1,5 @@
+﻿  Main.cpp
+C:\Users\Azamm\Downloads\Memory\immediate2d.h(1363,5): warning C4984: 'if constexpr' è un'estensione del linguaggio C++17
+C:\Users\Azamm\Downloads\Memory\immediate2d.h(1364,5): warning C4984: 'if constexpr' è un'estensione del linguaggio C++17
+C:\Users\Azamm\Downloads\Memory\immediate2d.h(1365,5): warning C4984: 'if constexpr' è un'estensione del linguaggio C++17
+  Memory.vcxproj -> C:\Users\Azamm\Downloads\Memory\x64\Debug\Memory.exe

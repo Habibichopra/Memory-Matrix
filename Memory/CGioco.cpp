@@ -15,10 +15,10 @@ void CGioco::inserimentoRandom()
 	for (int i = 0; i < livello; i++)
 	{
 		//scelgo una cella casuale della matrice
-		int colonne = rand() % 7;
-		int righe = rand() % 4;
-		//assicuro che la cella non sia già impostata a 1
-		//se si, sceglo di nuovo una casella casuale
+		int colonne = rand() % MAX_COLONNE;
+		int righe = rand() % MAX_RIGHE;
+			colonne = rand() % MAX_COLONNE;
+			righe = rand() % MAX_RIGHE;
 		while (matrice[colonne][righe] == 1) {
 			colonne = rand() % 7;
 			righe = rand() % 4;
@@ -38,7 +38,7 @@ void CGioco::inizializzazione()
 
 void CGioco::DrawInizializzata()
 {
-	//stampo la matrice con tutttle celle riempite di rosso ì con i bordi gialli
+	//stampo la matrice con tutttle celle riempite di rosso Ã¬ con i bordi gialli
 	for (int i = 0; i < MAX_COLONNE; i++) {
 		for (int j = 0; j < MAX_RIGHE; j++) {
 			DrawRectangle(i * 100, j * 100, 100, 100, Red, Yellow);
@@ -93,19 +93,24 @@ void CGioco::DrawSequenzaEsatta()
 
 bool CGioco::controllo(int x, int y)
 {
-	//controllo se la cella selezionata è quella randomica
-	//se non lo è esco subito e ritorno falso
-	//faccio diviso 100 perchè le celle hanno dimensione 100x100
-	if (matrice[x / 100][y / 100] != 0){
-		//controlla se la cella selezionata già stata selezionata precedentemente
-		if (matrice[x / 100][y / 100] != 2)
+	//controllo se la cella selezionata  quella randomica
+	//se non lo  esco subito e ritorno falso
+	//faccio diviso 100 perch le celle hanno dimensione 100x100
+	int colonna = x / 100;
+	int riga = y / 100;
+	if (colonna < 0 || colonna >= MAX_COLONNE || riga < 0 || riga >= MAX_RIGHE) {
+		return false;
+	}
+	if (matrice[colonna][riga] != 0){
+		//controlla se la cella selezionata gi stata selezionata precedentemente
+		if (matrice[colonna][riga] != 2)
 		{
 			//aggiorno lo stato(che indica i quadrati cliccati giusti
 			stato++;
 			//disegno un rettangolo di colore blu sulla cella selezionata
-			DrawRectangle((x / 100) * 100, (y / 100) * 100, 100, 100, LightBlue, LightBlue);
+			DrawRectangle(colonna * 100, riga * 100, 100, 100, LightBlue, LightBlue);
 			//imposto la cella selezionata a 2
-			matrice[x / 100][y / 100] = 2;
+			matrice[colonna][riga] = 2;
 		}
 		return true;
 	}
@@ -115,7 +120,7 @@ bool CGioco::controllo(int x, int y)
 bool CGioco::condizioneVittoria()
 {
 	//controllo quante celle giuste sono state selezionate
-	//se il numero di celle giustamente cliccate corrisponde al numero del livello, vittoria quindi riotrno trueù
+	//se il numero di celle giustamente cliccate corrisponde al numero del livello, vittoria quindi riotrno trueÃ¹
 	//altrimenti false
 	int cont = 0;
 	for (int i = 0; i < MAX_COLONNE; i++)
